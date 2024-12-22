@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_employee_salary_data_form">
+        <field name="name">employee.salary.data.form</field>
+        <field name="model">employee.salary.data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="date"/>
+                        <field name="basic_salary"/>
+                    </group>
+                    <group>
+                        <field name="working_days"/>
+                        <field name="overtime"/>
+                        <field name="net_salary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_employee_salary_wizard">
+        <field name="name">Select Employees and Field</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">employee.salary.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_salary_data_tree">
+        <field name="name">employee.salary.data.tree</field>
+        <field name="model">employee.salary.data</field>
+        <field name="arch" type="xml">
+            <tree decoration-bf="1">
+                <header>
+                    <button name="%(dynamic_employee_excel_report.action_employee_salary_wizard)d"
+                            string="Generate Report"
+                            type="action"
+                            class="btn-primary"/>
+                </header>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="basic_salary"/>
+                <field name="working_days"/>
+                <field name="overtime"/>
+                <field name="net_salary"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_employee_salary_data">
+        <field name="name">Employee Salary</field>
+        <field name="res_model">employee.salary.data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="view_employee_salary_wizard_form">
+        <field name="name">employee.salary.wizard.form</field>
+        <field name="model">employee.salary.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="employee_ids" widget="many2many_tags"
+                           placeholder="Leave empty to select all employees"/>
+                    <field name="selected_fields" widget="many2many_tags"/>
+                </group>
+
+                <footer>
+                    <button string="confirm" name="action_confirm" type="object" class="btn-primary"/>
+                    <button string="cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+    <menuitem
+            id="menu_hr_salary_root"
+            name="Salary Management"
+            parent="hr.menu_hr_root"
+            sequence="20"/>
+
+    <menuitem
+            id="menu_employee_salary_data"
+            name="Employee Salaries"
+            action="action_employee_salary_data"
+            parent="menu_hr_salary_root"
+            sequence="1"/>
+</odoo>

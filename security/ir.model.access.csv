@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_salary_data_user,employee.salary.data.user,model_employee_salary_data,hr.group_hr_user,1,1,1,1
+access_employee_salary_wizard,employee.salary.wizard,model_employee_salary_wizard,base.group_user,1,1,1,1
